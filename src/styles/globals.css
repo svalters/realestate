@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#__next {
+  height: 100%;
+}
+
+article {
+  min-height: 300px;
+}
+
+#chart {
+  @apply overflow-hidden;
+}
+
+#chart li {
+  @apply before:hidden !mx-0 !px-0;
+}
+
+#chart .recharts-default-legend {
+  @apply flex flex-row justify-center sm:justify-end !px-5;
+}
+
+#chart .recharts-default-legend li {
+  @apply items-center flex-col sm:flex-row text-center !flex !mx-2;
+}
+
+.loader {
+  @apply relative overflow-hidden w-36 h-36;
+}
+
+.loader div {
+  @apply h-full;
+}
+
+.loader,
+.loader div {
+  @apply animate-spin-slow rounded-full p-2 border-2;
+  border-top-color: theme("colors.pink.600");
+  border-right-color: theme("colors.indigo.900");
+  border-left-color: theme("colors.indigo.900");
+  border-bottom-color: theme("colors.transparent");
+}
