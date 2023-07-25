@@ -1,0 +1,12 @@
+name: load-new-entries
+on:
+  schedule:
+    - cron: "30 0 * * *"
+jobs:
+  start_schedule:
+    runs-on: ubuntu-latest
+     steps:
+    - name: curl
+      uses: wei/curl@master
+      with:
+        args: ${{ secrets.LOAD_NEW_ENTRIES_URL }}

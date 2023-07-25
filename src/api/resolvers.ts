@@ -1,22 +1,22 @@
-import { GraphQLScalarType } from "graphql"
+import { GraphQLScalarType } from "graphql";
 
-import Entry from "@/api/model"
+import Entry from "@/api/model";
 
 interface EntriesProps {
-  type?: string
-  location?: string
-  subLocation?: string
+  type?: string;
+  location?: string;
+  subLocation?: string;
 }
 
 interface SubLocationsProps {
-  location: string
-  type?: string
+  location: string;
+  type?: string;
 }
 
 const resolvers = {
   Date: new GraphQLScalarType({
     name: "Date",
-    serialize: value => value.getTime(),
+    serialize: (value) => value.getTime(),
   }),
   Query: {
     entry: (_: any, { id }: { id: string }) => Entry.findById(id),
@@ -31,7 +31,7 @@ const resolvers = {
         "subLocation"
       ),
     groupedEntries: (_: any, { type, location, subLocation }: EntriesProps) => {
-      const shouldMatch = type || location || subLocation
+      const shouldMatch = type || location || subLocation;
       return Entry.aggregate([
         ...(shouldMatch
           ? [
@@ -61,9 +61,9 @@ const resolvers = {
           },
         },
         { $sort: { createdAt: 1 } },
-      ])
+      ]);
     },
   },
-}
+};
 
-export default resolvers
+export default resolvers;
