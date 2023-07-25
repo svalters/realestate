@@ -1,9 +1,14 @@
 import mongoose from "mongoose";
 import { MONGODB_URI } from "./constants";
 
-const connection = mongoose.connect(MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+let connection: Promise<typeof mongoose> | undefined = undefined;
 
-export default connection;
+const newConnection = () => {
+  connection = mongoose.connect(MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  return connection;
+};
+
+export default connection ?? newConnection();

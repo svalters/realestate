@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { flatten } from "lodash";
 
 import { getCandidates, scrape, insertEntries } from "./scraper";
@@ -9,5 +8,5 @@ export const start = () =>
     .then(() => Promise.all(getCandidates()))
     .then((candidates) => Promise.all(scrape(candidates)))
     .then((entries) => flatten(entries))
-    .then((entries) => Promise.all(insertEntries(entries)))
-    .finally(() => mongoose.connection.close());
+    .then((entries) => Promise.all(insertEntries(entries)));
+// .finally(() => mongoose.connection.close());
